@@ -302,8 +302,7 @@ class Yedit(object):
         elif key_indexes[-1][1] and isinstance(data, dict):
             data[key_indexes[-1][1]] = item
 
-        return 'c'
-        #return data
+        return data
 
     @staticmethod
     def get_entry(data, key, sep='.'):
