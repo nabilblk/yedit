@@ -1,0 +1,10 @@
+L'inspiration :
+```
+https://github.com/kwoodson/yedit
+```
+
+
+Commande pour tester le play :
+```
+ansible-playbook plays/play.yml
+```

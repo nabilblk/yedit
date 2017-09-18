@@ -1,0 +1,26 @@
+- hosts: localhost
+  gather_facts: no
+  roles:
+  - roles/lib_yaml_editor
+  tasks:
+  - name: Cleanup files
+    file:
+      state: absent
+      path: ./service-configurations/
+  - name: Clone Config Repository
+    git:
+      repo: git@github.com:nabilblk/service-configurations.git
+      dest: ./service-configurations/
+      version: master
+  - name: Change Config service Discovery (Encrypted) - ma.spring.database.password
+    yedit:
+      src: ./service-configurations/test.yaml
+      key: ma.spring.database.password
+      value: Jmix20173747
+  - name: Change Config service Discovery (Encrypted) - eureka.client.serviceUrl.defaultZone
+    yedit:
+      src: ./service-configurations/admin-service.yml
+      key: eureka.client.serviceUrl.defaultZone
+      value: http://localhost:8761/eureka/
+  - name: Commit and push changes
+    shell: cd service-configurations ; git add test.yaml admin-service.yml; git commit -m "change config" ; git push
